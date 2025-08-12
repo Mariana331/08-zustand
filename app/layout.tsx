@@ -1,33 +1,33 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
-import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
 
 const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: 'NoteHub',
-  description: 'Notes gallery',
+  title: "NoteHub",
+  description: "Notes gallery",
   openGraph: {
-    title: 'NoteHub',
-    description: 'Notes gallery',
+    title: "NoteHub",
+    description: "Notes gallery",
     images: [
       {
-        url: '/public/image.png',
+        url: "/public/image.png",
         width: 1200,
         height: 630,
-        alt: 'logo',
+        alt: "logo",
       },
     ],
     url: `https://notehub/com`,
