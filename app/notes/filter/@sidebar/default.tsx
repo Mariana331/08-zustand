@@ -7,11 +7,6 @@ const SidebarNotes = () => {
     <>
       <ul className={css.menuList}>
         <li className={css.menuItem}>
-          <Link href="/notes/action/create" className={css.note}>
-            Create note
-          </Link>
-        </li>
-        <li className={css.menuItem}>
           <Link href="/notes/filter/All" className={css.menuLink}>
             All
           </Link>

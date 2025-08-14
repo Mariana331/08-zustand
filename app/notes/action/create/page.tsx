@@ -1,7 +1,8 @@
 import css from "./CreateNote.module.css";
 import NoteForm from "@/components/NoteForm/NoteForm";
+import { Metadata } from "next";
 
-export function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "New note",
     description: "Create new note",
