@@ -6,7 +6,6 @@ import { createNote } from "@/lib/api";
 import type { NewNoteData } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
-
 import { ChangeEvent } from "react";
 
 const NoteForm = () => {
@@ -21,7 +20,7 @@ const NoteForm = () => {
   ) => {
     setDraft({
       ...(draft as NewNoteData),
-      [e.target.name as keyof NewNoteData]: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -50,8 +49,9 @@ const NoteForm = () => {
           className={css.input}
           onChange={handleChange}
           defaultValue={draft.title}
+          required
         />
-        {isError && <span className={css.error}>required</span>}
+        {isError && <span className={css.error}>Error create note</span>}
       </div>
 
       <div className={css.formGroup}>
@@ -63,8 +63,8 @@ const NoteForm = () => {
           className={css.textarea}
           onChange={handleChange}
           defaultValue={draft.content}
+          required
         />
-        {isError && <span className={css.error}>required</span>}
       </div>
 
       <div className={css.formGroup}>
