@@ -1,10 +1,10 @@
-import { fetchNoteById } from '@/lib/api';
-import NoteDetailsClient from './NoteDetails.client';
+import { fetchNoteById } from "@/lib/api";
+import NoteDetailsClient from "./NoteDetails.client";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
-} from '@tanstack/react-query';
+} from "@tanstack/react-query";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -22,10 +22,10 @@ export const generateMetadata = async ({ params }: Props) => {
       description: note.content.slice(0, 20),
       images: [
         {
-          url: `/public/image.png`,
+          url: `https://ac.goit.global/fullstack/react/notehub-og-meta.jpg`,
           width: 1200,
           height: 630,
-          alt: 'logo',
+          alt: "logo",
         },
       ],
       url: `https://notehub/notes/${id}`,
@@ -39,7 +39,7 @@ const NoteDetails = async ({ params }: Props) => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ['note', id],
+    queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
   });
 

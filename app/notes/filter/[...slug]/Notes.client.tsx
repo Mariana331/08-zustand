@@ -1,18 +1,16 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import { useDebouncedCallback } from 'use-debounce';
-import { fetchNotes } from '@/lib/api';
-import { Note } from '@/types/note';
+import { useState } from "react";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { useDebouncedCallback } from "use-debounce";
+import { fetchNotes } from "@/lib/api";
+import { Note } from "@/types/note";
 
-import NoteList from '@/components/NoteList/NoteList';
-import Pagination from '@/components/Pagination/Pagination';
-import Modal from '@/components/Modal/Modal';
-import NoteForm from '@/components/NoteForm/NoteForm';
-import SearchBox from '@/components/SearchBox/SearchBox';
+import NoteList from "@/components/NoteList/NoteList";
+import Pagination from "@/components/Pagination/Pagination";
+import SearchBox from "@/components/SearchBox/SearchBox";
 
-import css from './notesPage.module.css';
+import css from "./notesPage.module.css";
 
 interface NotesProps {
   initialData: { notes: Note[]; totalPages: number };
@@ -20,9 +18,9 @@ interface NotesProps {
 }
 
 export default function NotesClient({ initialData, tag }: NotesProps) {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
 
   const updateSearchQuery = useDebouncedCallback((value: string) => {
     setSearchQuery(value);
@@ -35,22 +33,18 @@ export default function NotesClient({ initialData, tag }: NotesProps) {
   };
 
   const { data, isSuccess } = useQuery({
-    queryKey: ['notes', searchQuery, currentPage, tag],
+    queryKey: ["notes", searchQuery, currentPage, tag],
     queryFn: () =>
       fetchNotes({
         page: currentPage,
         search: searchQuery.trim() || undefined,
-        tag: tag === 'All' ? undefined : tag,
+        tag: tag === "All" ? undefined : tag,
       }),
     placeholderData: keepPreviousData,
     initialData,
   });
 
   const totalPagesFromData = data?.totalPages ?? 0;
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className={css.app}>
@@ -63,19 +57,11 @@ export default function NotesClient({ initialData, tag }: NotesProps) {
             onChange={setCurrentPage}
           />
         )}
-        <button className={css.button} onClick={openModal}>
-          Create note +
-        </button>
       </header>
       {isSuccess && data?.notes.length > 0 ? (
         <NoteList notes={data.notes} />
       ) : (
         isSuccess && <p className={css.nothing}>No notes found.</p>
-      )}
-      {isModalOpen && (
-        <Modal onClose={closeModal}>
-          <NoteForm onSuccess={closeModal} onCancel={closeModal} />
-        </Modal>
       )}
     </div>
   );

@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { Note, NewNoteData } from '@/types/note';
+import axios from "axios";
 
 const API_URL = `https://notehub-public.goit.study/api`;
 const TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
@@ -14,7 +13,22 @@ interface FetchNotesParams {
   tag?: string;
   page?: number;
   perPage?: number;
-  sortBy?: 'createdAt' | 'updatedAt' | 'title';
+  sortBy?: "createdAt" | "updatedAt" | "title";
+}
+
+export interface Note {
+  id: string;
+  title: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  tag: string;
+}
+
+export interface NewNoteData {
+  title: string;
+  content: string;
+  tag: string;
 }
 
 export const fetchNotes = async ({
@@ -43,7 +57,7 @@ export const createNote = async (data: NewNoteData): Promise<Note> => {
   const response = await axios.post<Note>(`${API_URL}/notes`, data, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
   return response.data;

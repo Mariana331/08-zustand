@@ -21,13 +21,12 @@ export const metadata: Metadata = {
     description: "Notes gallery",
     images: [
       {
-        url: "/public/image.png",
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
         width: 1200,
         height: 630,
         alt: "logo",
       },
     ],
-    url: `https://notehub/com`,
   },
 };
 
